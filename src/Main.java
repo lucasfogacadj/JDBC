@@ -11,7 +11,7 @@ public class Main {
 
 		
 		do{
-			System.out.println("1- Cadastrar Pessoa\n2- Excluir por nome:\n3- Excluir por id\n4- Consultar toda a tabela\n5- Sair");
+			System.out.println("1- Cadastrar Pessoa\n2- Excluir por nome:\n3- Excluir por id\n4- Consultar toda a tabela\n5- Consulta por nome\n6- Sair");
 			opc=tc.nextInt();
 			switch(opc){
 			
@@ -32,13 +32,16 @@ public class Main {
 			
 			case 4:{
 				Pessoa.Consulta();
+				break;
+			}
+			case 5:{
+				Pessoa.consultaPorNome();
+				break;
 			}
 			
-			}
+			}	
 			
-			
-			
-		}while(opc!=5);
+		}while(opc!=6);
 		
 
 	}

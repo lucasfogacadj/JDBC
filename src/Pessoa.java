@@ -139,6 +139,46 @@ public static void removerId(){
 		
 		
 	}
+		
+
+		public static void consultaPorNome(){
+			
+			String url = "jdbc:mysql://127.0.0.1/AulaAP3";
+			String usuario = "root";
+			String senha = "";
+			
+			@SuppressWarnings("resource")
+			Scanner tc = new Scanner(System.in);
+			
+			try {
+				System.out.println("Digite o nome a ser consultado: ");
+				String nome1=tc.next();
+				Connection conexao = DriverManager.getConnection(url, usuario, senha);
+				System.out.println("Conectato");
+				String sql = "SELECT * FROM pessoas WHERE nome="+nome1+");";
+				PreparedStatement comandoSQL = (PreparedStatement) conexao.prepareStatement(sql);
+				ResultSet resultado = comandoSQL.executeQuery();
+				while(resultado.next()) {
+				int id = resultado.getInt("id");
+				String nome = resultado.getString("nome");
+				int idade = resultado.getInt("idade");
+				System.out.println(nome);
+				System.out.println(idade);
+				System.out.println(id);
+				
+				}
+				
+				comandoSQL.execute();
+				comandoSQL.close();
+				
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+			}
+		
+		
+	}
 	
 	
 
