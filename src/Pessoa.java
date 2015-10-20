@@ -2,6 +2,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Scanner;
+
+import javax.sound.midi.Synthesizer;
+
 import java.sql.ResultSet;
 
 import com.mysql.jdbc.PreparedStatement;
@@ -121,6 +124,7 @@ public static void removerId(){
 				int idade = resultado.getInt("idade");
 				System.out.println(nome);
 				System.out.println(idade);
+				System.out.println(id);
 				
 				}
 				
