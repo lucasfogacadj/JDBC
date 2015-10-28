@@ -31,13 +31,10 @@ public class Pessoa {
 	
 	public void addBanco(){
 		
-		String url = "jdbc:mysql://127.0.0.1/AulaAP3";
-		String usuario = "root";
-		String senha = "";
+		Connection conexao = ConnectionFactory.createConnection();
 		
 		try {
-			Connection conexao = DriverManager.getConnection(url, usuario, senha);
-			System.out.println("Conectato");
+			
 			String sql = "INSERT INTO AulaAP3. pessoas (nome , idade) VALUES ('"+this.getNome()+"',"+this.getIdade()+");";
 			PreparedStatement comandoSQL = (PreparedStatement) conexao.prepareStatement(sql);
 			comandoSQL.execute();
@@ -53,9 +50,7 @@ public class Pessoa {
 	
 	public static void removerNome(){
 		
-		String url = "jdbc:mysql://127.0.0.1/AulaAP3";
-		String usuario = "root";
-		String senha = "";
+		Connection conexao = ConnectionFactory.createConnection();
 		
 		@SuppressWarnings("resource")
 		Scanner tc = new Scanner(System.in);
@@ -63,10 +58,9 @@ public class Pessoa {
 		try {
 			System.out.println("Digite o nome a ser excluido: ");
 			String nome=tc.next();
-			Connection conexao = DriverManager.getConnection(url, usuario, senha);
-			System.out.println("Conectato");
-			String sql = "DELETE FROM pessoas where nome="+nome+");";
+			String sql = "DELETE FROM pessoas WHERE  nome LIKE ?;";
 			PreparedStatement comandoSQL = (PreparedStatement) conexao.prepareStatement(sql);
+			comandoSQL.setString(1, nome);
 			comandoSQL.execute();
 			comandoSQL.close();
 			
@@ -79,19 +73,15 @@ public class Pessoa {
 	
 public static void removerId(){
 		
-		String url = "jdbc:mysql://127.0.0.1/AulaAP3";
-		String usuario = "root";
-		String senha = "";
-		
+	Connection conexao = ConnectionFactory.createConnection();
+	
 		@SuppressWarnings("resource")
 		Scanner tc = new Scanner(System.in);
 		
 		try {
 			System.out.println("Digite a id ser excluido: ");
 			int id=tc.nextInt();
-			Connection conexao = DriverManager.getConnection(url, usuario, senha);
-			System.out.println("Conectato");
-			String sql = "DELETE FROM pessoas where nome=+id";
+			String sql = "DELETE FROM pessoas where id="+id+";";
 			PreparedStatement comandoSQL = (PreparedStatement) conexao.prepareStatement(sql);
 			comandoSQL.execute();
 			comandoSQL.close();
@@ -105,15 +95,12 @@ public static void removerId(){
 		
 		public static void Consulta(){
 			
-			String url = "jdbc:mysql://127.0.0.1/AulaAP3";
-			String usuario = "root";
-			String senha = "";
+			Connection conexao = ConnectionFactory.createConnection();
 			
 			@SuppressWarnings("resource")
 			Scanner tc = new Scanner(System.in);
 			
 			try {
-				Connection conexao = DriverManager.getConnection(url, usuario, senha);
 				System.out.println("Conectato");
 				String sql = "SELECT * FROM pessoas;";
 				PreparedStatement comandoSQL = (PreparedStatement) conexao.prepareStatement(sql);
@@ -122,9 +109,9 @@ public static void removerId(){
 				int id = resultado.getInt("id");
 				String nome = resultado.getString("nome");
 				int idade = resultado.getInt("idade");
-				System.out.println(nome);
-				System.out.println(idade);
-				System.out.println(id);
+				System.out.println("Nome "+nome);
+				System.out.println("Idade"+idade);
+				System.out.println("ID "+id);
 				
 				}
 				
@@ -143,9 +130,7 @@ public static void removerId(){
 
 		public static void consultaPorNome(){
 			
-			String url = "jdbc:mysql://127.0.0.1/AulaAP3";
-			String usuario = "root";
-			String senha = "";
+			Connection conexao = ConnectionFactory.createConnection();
 			
 			@SuppressWarnings("resource")
 			Scanner tc = new Scanner(System.in);
@@ -153,10 +138,10 @@ public static void removerId(){
 			try {
 				System.out.println("Digite o nome a ser consultado: ");
 				String nome1=tc.next();
-				Connection conexao = DriverManager.getConnection(url, usuario, senha);
 				System.out.println("Conectato");
-				String sql = "SELECT * FROM pessoas WHERE nome="+nome1+");";
+				String sql = "SELECT * FROM pessoas WHERE nome=?;";
 				PreparedStatement comandoSQL = (PreparedStatement) conexao.prepareStatement(sql);
+				comandoSQL.setString(1, nome1);
 				ResultSet resultado = comandoSQL.executeQuery();
 				while(resultado.next()) {
 				int id = resultado.getInt("id");
